@@ -11,9 +11,25 @@
         <div class="page-header">
             {% if user.is_authenticated %}
                 <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="{% url 'post_draft_list' %}" class="top-menu">Drafts</a>
+                
+                <div style="float: right; text-align: right;">
+                    <p class="top-menu">Hello {{ user.username }}</p>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background: none; border: none; color: blue; cursor: pointer; font-size: 18pt;">
+                            Log out
+                        </button>
+                    </form>
+                </div>
+                
+            {% else %}
+                <p class="top-menu"><a href="{% url 'login' %}">Login</a></p>
             {% endif %}
+        
             <h1><a href="/">Django Girls Blog</a></h1>
         </div>
+        
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
